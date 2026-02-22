@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  text-align: center;
+  background: #fffafc;
+  color: #444;
+  scroll-behavior: smooth;
+}
+
+.section {
+  padding: 50px 18px;
+}
+
+.hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
+}
+
+h1 {
+  font-size: 34px;
+  color: #b76e79;
+  margin: 0;
+}
+
+h2 {
+  color: #b76e79;
+}
+
+.date {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* VIDEO MOBILE OPTIMIZED */
+.video-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+video {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* map */
+iframe {
+  width: 100%;
+  height: 230px;
+  border: none;
+  border-radius: 12px;
+}
+
+button {
+  padding: 14px 28px;
+  border: none;
+  background: #b76e79;
+  color: white;
+  font-size: 16px;
+  border-radius: 30px;
+}
+
+/* animation */
+.fade {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: 0.8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  padding: 25px;
+  background: #ffe6eb;
+  font-size: 14px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  h1 { font-size: 28px; }
+  .section { padding: 40px 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- optional background music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section class="section hero">
+  <h1>John ❤️ Maria</h1>
+  <p>We are getting married</p>
+  <p class="date">June 25, 2026</p>
+  <p>Scroll down ↓</p>
+</section>
+
+<!-- VIDEO PRESENTATION -->
+<section class="section fade">
+  <h2>Our Story</h2>
+
+  <div class="video-container">
+    <video controls playsinline>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <p>Tap the video to play with sound 🎥</p>
+</section>
+
+<!-- INVITATION -->
+<section class="section fade">
+  <h2>You Are Invited</h2>
+  <p>
+    Together with our families,<br>
+    we invite you to celebrate our wedding day.
+  </p>
+</section>
+
+<!-- DETAILS -->
+<section class="section fade">
+  <h2>Wedding Details</h2>
+  <p><strong>Ceremony:</strong> 2:00 PM</p>
+  <p><strong>Venue:</strong> Sunset Garden Resort</p>
+  <p><strong>Location:</strong> Pangasinan</p>
+</section>
+
+<!-- MAP -->
+<section class="section fade">
+  <h2>Location Map</h2>
+  <iframe src="https://maps.google.com/maps?q=pangasinan&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<!-- RSVP -->
+<section class="section fade">
+  <h2>RSVP</h2>
+  <p>Please confirm your attendance</p>
+  <button onclick="rsvp()">Confirm Attendance</button>
+</section>
+
+<footer class="fade">
+  <p>We can't wait to celebrate with you 💕</p>
+</footer>
+
+<script>
+// autoplay music after first tap (mobile friendly)
+document.body.addEventListener("click", () => {
+  const music = document.getElementById("bgMusic");
+  if (music) music.play();
+}, { once: true });
+
+// RSVP
+function rsvp() {
+  alert("Thank you for confirming! 💕");
+}
+
+// scroll animation
+const faders = document.querySelectorAll('.fade');
+
+const appear = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+faders.forEach(el => appear.observe(el));
+</script>
+
+</body>
+</html>
